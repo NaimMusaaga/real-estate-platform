@@ -1,0 +1,36 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens for the platform. A deliberate warm teal + amber pairing —
+ * not the default Tailwind blue/indigo — to read as a real estate brand
+ * rather than a generic SaaS dashboard.
+ */
+@theme {
+  --font-sans: 'Cairo', Tahoma, Arial, sans-serif;
+
+  --color-brand-50: #eff7f5;
+  --color-brand-100: #d7ece6;
+  --color-brand-200: #b0d9ce;
+  --color-brand-300: #82c2b0;
+  --color-brand-400: #52a48f;
+  --color-brand-500: #348572;
+  --color-brand-600: #226b5a;
+  --color-brand-700: #1b5548;
+  --color-brand-800: #16443a;
+  --color-brand-900: #123830;
+
+  --color-accent-400: #dba847;
+  --color-accent-500: #c9932a;
+  --color-accent-600: #b07d1e;
+}
+
+@layer base {
+  body {
+    @apply bg-stone-50 text-stone-900 antialiased;
+  }
+
+  /* Visible keyboard focus everywhere, not just the browser default outline. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-stone-50;
+  }
+}
