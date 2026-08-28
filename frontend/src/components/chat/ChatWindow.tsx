@@ -8,6 +8,8 @@ import { MessageInput } from './MessageInput';
 import { PresenceIndicator } from './PresenceIndicator';
 import { Button } from '../common/Button';
 import { Spinner } from '../common/Spinner';
+import { Alert } from '../common/Alert';
+import { getErrorMessage } from '../../utils/errors';
 import type { ConversationSummary, Message } from '../../types/conversation.types';
 import type { MessageDeliveredPayload, MessageNewPayload, MessageReadPayload } from '../../types/socket.types';
 
@@ -24,6 +26,7 @@ export function ChatWindow({ conversation, onBack }: ChatWindowProps) {
   const [blockedByMe, setBlockedByMe] = useState(false);
   const [blockedByOther, setBlockedByOther] = useState(false);
   const [blockActionLoading, setBlockActionLoading] = useState(false);
+  const [blockError, setBlockError] = useState('');
   const bottomRef = useRef<HTMLDivElement>(null);
   const lastReadSentRef = useRef<string | null>(null);
 
@@ -106,6 +109,7 @@ export function ChatWindow({ conversation, onBack }: ChatWindowProps) {
 
   async function handleToggleBlock() {
     if (!otherUserId) return;
+    setBlockError('');
     setBlockActionLoading(true);
     try {
       if (blockedByMe) {
@@ -115,6 +119,8 @@ export function ChatWindow({ conversation, onBack }: ChatWindowProps) {
         await usersApi.blockUser(otherUserId);
         setBlockedByMe(true);
       }
+    } catch (err) {
+      setBlockError(getErrorMessage(err, 'تعذّر تنفيذ الإجراء'));
     } finally {
       setBlockActionLoading(false);
     }
@@ -142,6 +148,12 @@ export function ChatWindow({ conversation, onBack }: ChatWindowProps) {
           </Button>
         )}
       </div>
+
+      {blockError && (
+        <div className="px-4 pt-3">
+          <Alert variant="error">{blockError}</Alert>
+        </div>
+      )}
 
       <div className="flex-1 overflow-y-auto p-4">
         {loading ? (
