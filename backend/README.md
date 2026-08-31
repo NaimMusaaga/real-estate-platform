@@ -1,6 +1,6 @@
 # Backend — Real Estate Platform (MVP)
 
-Node.js + Express + Socket.IO + MySQL/MariaDB. Local development only for now (see `system-architecture.md` in the project root for the zero-cost deployment plan).
+Node.js + Express + Socket.IO + MySQL/MariaDB. Local development only for now (see [system-architecture.md](../docs/system-architecture.md) for the zero-cost deployment plan).
 
 ## Setup
 
@@ -19,7 +19,15 @@ Node.js + Express + Socket.IO + MySQL/MariaDB. Local development only for now (s
 - **Listings**: full CRUD across residential/commercial/land types (each with its own detail table), dual SYP/USD pricing, payment terms, public search/browse with filters, optional photo uploads (multer, local disk storage, JPEG/PNG/WEBP, up to 8 per listing).
 - **Real-time chat**: Socket.IO rooms per conversation, messaging, delivery + read receipts, online/last-seen presence, per-user rate limiting, block enforcement.
 - **Moderation**: users can report a listing (fraudulent/duplicate/inappropriate/etc.); admins review the report queue and dismiss, archive, or permanently remove the listing — every archive/remove action an admin takes on someone else's listing is written to the admin audit log automatically.
-- **Stats**: personal counts (`/users/me/stats`) and an admin-wide overview (`/admin/stats`).
+- **Stats**: personal counts (`/users/me/stats`), an admin-wide overview (`/admin/stats`), and a public summary (`/stats/public` — active listings + active users, no auth required, used by the homepage stats banner).
+
+## Testing
+
+```bash
+npm test
+```
+
+`node:test` + `supertest`, run against the real Express app and a real database — no mocks, matching how this backend has been tested throughout. Each test file cleans up the rows it creates.
 
 ## Explicitly not implemented (deferred, not forgotten)
 

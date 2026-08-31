@@ -34,7 +34,7 @@ A full-stack property portal for the Syrian real-estate market: search and list 
 
 ## Live Demo
 
-_Deployment pending — see [system-architecture.md](system-architecture.md) for the planned zero-cost deployment target (Oracle Cloud Always Free)._
+_Deployment pending — see [system-architecture.md](docs/system-architecture.md) for the planned zero-cost deployment target (Oracle Cloud Always Free)._
 
 ## Tech Stack
 
@@ -54,6 +54,15 @@ Real issues found and fixed while building this, not a hypothetical list — eac
 - **Adapting the schema to the real database, not the assumed one.** The initial design targeted MySQL 8 (`utf8mb4_0900_ai_ci`, `FULLTEXT … WITH PARSER ngram`). The actual local dev target was MariaDB 10.4 (XAMPP), which supports neither — caught by actually running the migration, not by reviewing the SQL on paper. Fixed by moving to `utf8mb4_unicode_ci` and plain `LIKE` search.
 - **A dependency-chain security fix.** `npm audit` flagged a critical vulnerability pulled in transitively through `bcrypt`'s native-binary installer (`node-pre-gyp` → a vulnerable `tar`). Swapped to `bcryptjs` — pure JS, same API, no native compile step, and it also removes the Windows build-tools requirement for local dev.
 - **A deliberate, reversible trade-off on email verification.** The full verify-email flow (token issuance, `/auth/verify-email`, console-logged link) was built and worked. Once real users started hitting it in a `EMAIL_MODE=console` environment with no outbound mail, it was actively blocking onboarding. Rather than rip the feature out, the login-time enforcement was removed while the underlying flow stays intact — re-enabling it later (once real SMTP is wired up) is a three-line change, not a rebuild.
+
+## Design Docs
+
+The four planning-phase documents this build followed, in order — kept as originally written rather than edited after the fact, so each document's own corrections to the assumptions of the one before it are still visible:
+
+1. [Requirements & Architecture Foundations](docs/requirements-and-architecture-foundations.md)
+2. [Database Design](docs/database-design.md)
+3. [API / WebSocket Contract](docs/api-websocket-contract.md)
+4. [System Architecture](docs/system-architecture.md)
 
 ## Getting Started
 
@@ -99,4 +108,8 @@ frontend/src/
   pages/ components/ context/ hooks/ routes/               # screens & app shell
   services/api/                                             # typed REST clients
   types/                                                     # shared TS types, mirror backend JSON shapes
+
+docs/
+  screenshots/                                              # README images + demo GIF
+  *.md                                                       # the four planning-phase docs
 ```
