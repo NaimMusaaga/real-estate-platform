@@ -13,7 +13,7 @@ export function ListingCard({ listing, governorateName }: ListingCardProps) {
   return (
     <Link
       to={`/listings/${listing.id}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition-shadow duration-150 hover:shadow-md"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
     >
       {listing.photos.length > 0 ? (
         <div className="h-40 overflow-hidden bg-stone-100">

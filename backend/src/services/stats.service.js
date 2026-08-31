@@ -55,4 +55,16 @@ async function getAdminStats() {
   };
 }
 
-module.exports = { getMyStats, getAdminStats };
+async function getPublicStats() {
+  const [userCounts, listingCounts] = await Promise.all([
+    userRepository.countByStatusAndRole(),
+    listingRepository.countByStatusAndType(),
+  ]);
+
+  return {
+    activeListingsCount: n(listingCounts.active),
+    activeUsersCount: n(userCounts.active),
+  };
+}
+
+module.exports = { getMyStats, getAdminStats, getPublicStats };

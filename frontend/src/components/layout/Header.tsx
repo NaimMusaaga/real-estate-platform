@@ -15,7 +15,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-10 border-b border-stone-200 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3">
         <Link to="/" className="flex items-center gap-2 text-brand-800">
           <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7" aria-hidden="true">
             <path
@@ -30,9 +30,12 @@ export function Header() {
         </Link>
 
         {user ? (
-          <nav className="flex items-center gap-1">
+          <nav className="flex flex-wrap items-center justify-end gap-1">
             <Link to="/" className={NAV_LINK_CLASS}>
               الرئيسية
+            </Link>
+            <Link to="/about" className={NAV_LINK_CLASS}>
+              من نحن
             </Link>
             <Link to="/create-listing" className={NAV_LINK_CLASS}>
               أضف عقاراً
@@ -56,9 +59,12 @@ export function Header() {
             </Button>
           </nav>
         ) : (
-          <nav className="flex items-center gap-2">
+          <nav className="flex flex-wrap items-center justify-end gap-2">
             <Link to="/" className={NAV_LINK_CLASS}>
               الرئيسية
+            </Link>
+            <Link to="/about" className={NAV_LINK_CLASS}>
+              من نحن
             </Link>
             <Link to="/login" className={NAV_LINK_CLASS}>
               تسجيل الدخول

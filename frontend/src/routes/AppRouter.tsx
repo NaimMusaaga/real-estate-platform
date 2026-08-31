@@ -3,6 +3,7 @@ import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import VerifyEmailPage from '../pages/VerifyEmailPage';
 import PublicSearchPage from '../pages/PublicSearchPage';
+import AboutPage from '../pages/AboutPage';
 import DashboardPage from '../pages/DashboardPage';
 import CreateListingPage from '../pages/CreateListingPage';
 import MyListingsPage from '../pages/MyListingsPage';
@@ -25,6 +26,7 @@ export function AppRouter() {
 
       {/* Public: Screen 2. No auth required — matches FR-SF-1 (guests can browse). */}
       <Route path="/" element={<PublicSearchPage />} />
+      <Route path="/about" element={<AboutPage />} />
       <Route path="/listings/:id" element={<ListingDetailPage />} />
 
       {/* Screen 5: the real dashboard, replacing the placeholder that lived here since Screen 2. */}

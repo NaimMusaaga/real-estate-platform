@@ -5,6 +5,7 @@ import { PropertyDetailsGrid } from '../components/listing/PropertyDetailsGrid';
 import { ChatInquiryButton } from '../components/listing/ChatInquiryButton';
 import { PhotoGallery } from '../components/listing/PhotoGallery';
 import { ReportListingModal } from '../components/listing/ReportListingModal';
+import { WhatsAppShareButton } from '../components/listing/WhatsAppShareButton';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { Spinner } from '../components/common/Spinner';
@@ -141,6 +142,9 @@ export default function ListingDetailPage() {
               {isOwnListing && (
                 <p className="rounded-xl bg-stone-50 p-3 text-center text-sm text-stone-500">هذا إعلانك الخاص</p>
               )}
+
+              <WhatsAppShareButton listing={listing} />
+
               {!isOwnListing && user && (
                 <Button variant="ghost" size="sm" onClick={() => setReportModalOpen(true)}>
                   الإبلاغ عن هذا الإعلان

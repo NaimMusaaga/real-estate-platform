@@ -6,6 +6,7 @@ const referenceDataRoutes = require('./referenceData.routes');
 const adminRoutes = require('./admin.routes');
 const conversationRoutes = require('./conversation.routes');
 const reportRoutes = require('./report.routes');
+const statsRoutes = require('./stats.routes');
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.use('/', referenceDataRoutes);
 router.use('/admin', adminRoutes);
 router.use('/conversations', conversationRoutes);
 router.use('/reports', reportRoutes);
+router.use('/stats', statsRoutes);
 
 module.exports = router;
