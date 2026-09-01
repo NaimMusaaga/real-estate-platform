@@ -173,9 +173,18 @@ export default function PublicSearchPage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-brand-950 via-brand-900 to-brand-800 px-4 pb-24 pt-16 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-b from-brand-950 via-brand-900 to-brand-800 px-4 pb-32 pt-20 text-white">
+        {/* Soft glow orbs for depth — no imagery needed */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
+          className="pointer-events-none absolute -top-24 -end-24 h-96 w-96 rounded-full bg-accent-500/20 blur-3xl"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute -bottom-32 -start-32 h-96 w-96 rounded-full bg-brand-400/20 blur-3xl"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
               'radial-gradient(circle at 20% 20%, white 1px, transparent 1px), radial-gradient(circle at 70% 60%, white 1px, transparent 1px)',
@@ -183,18 +192,24 @@ export default function PublicSearchPage() {
           }}
           aria-hidden="true"
         />
+
         <div className="relative mx-auto max-w-4xl text-center">
-          <span className="inline-block rounded-full border border-accent-400/40 bg-accent-400/10 px-4 py-1 text-xs font-semibold tracking-wide text-accent-400">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-400/40 bg-accent-400/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-accent-400">
+            <svg viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5" aria-hidden="true">
+              <path d="M12 2 9.2 8.6 2 9.3l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7 5.5-4.7-7.2-.7L12 2Z" />
+            </svg>
             منصة العقارات السورية الأولى للتواصل المباشر
           </span>
-          <h1 className="mt-5 text-3xl font-extrabold leading-tight sm:text-5xl">
-            ابحث عن عقارك القادم <span className="text-accent-400">بثقة وسهولة</span>
+          <h1 className="mt-6 text-4xl font-extrabold leading-[1.15] sm:text-6xl">
+            ابحث عن عقارك القادم
+            <br />
+            <span className="text-accent-400">بثقة وسهولة</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-brand-200 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base text-brand-200 sm:text-lg">
             آلاف العقارات للبيع والإيجار في جميع المحافظات السورية — تواصل مباشرة مع المالك، بدون وسطاء.
           </p>
 
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-2">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.type}
@@ -212,11 +227,30 @@ export default function PublicSearchPage() {
             </button>
           </div>
         </div>
+
+        {/* Skyline silhouette — a real-estate motif that reads instantly, no photography needed */}
+        <svg
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full sm:h-32"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            className="text-brand-950/70"
+            d="M0 120V70h50v-20h35v20h40V50h60v20h30V25l35-12 35 12v33h45V38h65v32h25v-12h70v12h35V25h55v45h40V45h60v30h35V35h70v30h30v-15h60v15h35V45h55v30h50V120Z"
+          />
+          <path
+            fill="currentColor"
+            className="text-brand-950"
+            d="M0 120V90h45v-15h30v15h55v-30h40v30h25V50l40-14 40 14v40h50V60h70v30h20v-8h75v8h30V50h60v40h45V70h65v20h30V60h75v30h35v-10h65v10h40V80h55v40Z"
+          />
+        </svg>
       </section>
 
       <main className="mx-auto max-w-6xl px-4 pb-16">
         {/* Search bar, overlapping the hero */}
-        <div className="-mt-14 rounded-2xl border border-stone-200 bg-white p-5 shadow-xl shadow-brand-950/10">
+        <div className="relative -mt-16 overflow-hidden rounded-2xl bg-white shadow-2xl shadow-brand-950/20 ring-1 ring-stone-900/5">
           <SearchFilters governorates={governorates} cities={citiesForFilter} filters={filters} onChange={handleFiltersChange} />
         </div>
 
