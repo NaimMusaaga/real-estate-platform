@@ -6,6 +6,7 @@ import PublicSearchPage from '../pages/PublicSearchPage';
 import AboutPage from '../pages/AboutPage';
 import DashboardPage from '../pages/DashboardPage';
 import CreateListingPage from '../pages/CreateListingPage';
+import EditListingPage from '../pages/EditListingPage';
 import MyListingsPage from '../pages/MyListingsPage';
 import ListingDetailPage from '../pages/ListingDetailPage';
 import ProfilePage from '../pages/ProfilePage';
@@ -51,6 +52,14 @@ export function AppRouter() {
         element={
           <ProtectedRoute>
             <MyListingsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/listings/:id/edit"
+        element={
+          <ProtectedRoute>
+            <EditListingPage />
           </ProtectedRoute>
         }
       />

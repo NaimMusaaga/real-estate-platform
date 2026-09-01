@@ -82,6 +82,12 @@ export function OwnerListingCard({
             إعادة التنشيط
           </Button>
         )}
+        <Link
+          to={`/listings/${listing.id}/edit`}
+          className="inline-flex items-center justify-center gap-2 rounded-xl border border-stone-300 px-3 py-1.5 text-sm font-semibold text-stone-800 transition-colors duration-150 hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600"
+        >
+          تعديل
+        </Link>
         <Button variant="outline" size="sm" onClick={() => onManagePhotos(listing)}>
           الصور {listing.photos.length > 0 && `(${listing.photos.length})`}
         </Button>
