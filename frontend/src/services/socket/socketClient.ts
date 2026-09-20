@@ -5,7 +5,9 @@ let socket: AppSocket | null = null;
 
 export function connectSocket(token: string): AppSocket {
   if (socket) return socket;
-  socket = io(import.meta.env.VITE_SOCKET_URL, { auth: { token } });
+  // An empty URL (production, same-origin behind Nginx) must become undefined so socket.io
+  // connects to the current origin instead of parsing '' as a host.
+  socket = io(import.meta.env.VITE_SOCKET_URL || undefined, { auth: { token } });
   return socket;
 }
 

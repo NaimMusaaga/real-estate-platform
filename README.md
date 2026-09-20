@@ -38,7 +38,7 @@ A full-stack property portal for the Syrian real-estate market: search and list 
 
 ## Live Demo
 
-_Deployment pending — see [system-architecture.md](docs/system-architecture.md) for the planned zero-cost deployment target (Oracle Cloud Always Free)._
+_Deployment pending — the zero-cost Oracle Cloud Always Free setup is scripted in [`deploy/`](deploy) and documented in [docs/deployment.md](docs/deployment.md)._
 
 ## Tech Stack
 
