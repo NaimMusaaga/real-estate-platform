@@ -1,4 +1,8 @@
-# منصة العقارات — Syrian Real Estate & Real-Time Chat Platform
+<p align="center">
+  <img src="docs/logo.jpeg" alt="logai — Engineering · Systems · AI" width="220" />
+</p>
+
+# logai — Syrian Real Estate & Real-Time Chat Platform
 
 A full-stack property portal for the Syrian real-estate market: search and list residential, commercial, and land properties, chat live with the owner over Socket.IO, and moderate the platform through a dedicated admin dashboard. Built end-to-end — schema, API, real-time layer, and a fully Arabic/RTL TypeScript frontend.
 

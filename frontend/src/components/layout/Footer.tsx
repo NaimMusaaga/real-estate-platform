@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { BrandLogo } from './BrandLogo';
 
 const LINK_CLASS = 'text-sm text-brand-200 transition-colors hover:text-accent-400';
 
@@ -10,18 +11,9 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-12">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col gap-3">
-            <Link to="/" className="flex items-center gap-2 text-white">
-              <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 text-accent-400" aria-hidden="true">
-                <path
-                  d="M3 11.5 12 4l9 7.5M5 10v9a1 1 0 0 0 1 1h3v-6h6v6h3a1 1 0 0 0 1-1v-9"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span className="text-lg font-extrabold tracking-tight">منصة العقارات</span>
-            </Link>
+            <div className="self-start">
+              <BrandLogo variant="light" size="lg" />
+            </div>
             <p className="text-sm leading-relaxed text-brand-300">
               منصة سورية للبحث عن العقارات والتواصل المباشر مع الملّاك، ببساطة وشفافية.
             </p>
@@ -65,7 +57,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-brand-800 pt-6 text-sm text-brand-400 sm:flex-row">
-          <p>© {year} منصة العقارات. جميع الحقوق محفوظة.</p>
+          <p>© {year} logai. جميع الحقوق محفوظة.</p>
           <p>صُنع بعناية لسوق العقارات السوري</p>
         </div>
       </div>

@@ -34,7 +34,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <AuthLayout title="إنشاء حساب جديد" subtitle="انضم لمنصة العقارات لعرض إعلاناتك أو التواصل مع الملّاك مباشرة">
+    <AuthLayout title="إنشاء حساب جديد" subtitle="انضم إلى logai لعرض إعلاناتك أو التواصل مع الملّاك مباشرة">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
         {error && <Alert variant="error">{error}</Alert>}
 
