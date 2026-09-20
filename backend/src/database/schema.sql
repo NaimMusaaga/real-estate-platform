@@ -137,11 +137,14 @@ CREATE TABLE listing_photos (
     url         VARCHAR(500) NOT NULL,
     sort_order  SMALLINT NOT NULL DEFAULT 0,
     is_cover    BOOLEAN NOT NULL DEFAULT FALSE,
-    cover_slot  CHAR(36) GENERATED ALWAYS AS (CASE WHEN is_cover THEN listing_id END) STORED,
+    -- 1 for the cover row, NULL otherwise. Built from is_cover only: MariaDB 10.5+ rejects a
+    -- generated column whose base column (listing_id) sits in a CASCADE foreign key.
+    -- NULLs never collide in a unique index, so (listing_id, cover_slot) allows one cover per listing.
+    cover_slot  TINYINT GENERATED ALWAYS AS (CASE WHEN is_cover THEN 1 END) STORED,
     created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     CONSTRAINT fk_listing_photos_listing FOREIGN KEY (listing_id) REFERENCES listings(id) ON DELETE CASCADE,
-    UNIQUE KEY uq_listing_photos_one_cover (cover_slot)
+    UNIQUE KEY uq_listing_photos_one_cover (listing_id, cover_slot)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE INDEX idx_listing_photos_order ON listing_photos(listing_id, sort_order);
 
