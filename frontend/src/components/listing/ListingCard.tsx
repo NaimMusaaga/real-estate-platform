@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import type { Listing } from '../../types/listing.types';
 import { formatSyp, formatUsd } from '../../utils/formatPrice';
 import { PROPERTY_TYPE_LABELS, TRANSACTION_TYPE_LABELS } from '../../utils/listingLabels';
-import { resolveMediaUrl } from '../../utils/mediaUrl';
 
 interface ListingCardProps {
   listing: Listing;
@@ -15,27 +14,18 @@ export function ListingCard({ listing, governorateName }: ListingCardProps) {
       to={`/listings/${listing.id}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
     >
-      {listing.photos.length > 0 ? (
-        <div className="h-40 overflow-hidden bg-stone-100">
-          <img
-            src={resolveMediaUrl(listing.photos[0].url)}
-            alt=""
-            className="h-full w-full object-cover transition-transform duration-150 group-hover:scale-105"
+      {/* Photos are intentionally not shown on the card — they open on the detail page. */}
+      <div className="flex h-32 items-center justify-center bg-gradient-to-br from-brand-100 to-brand-50 text-brand-400">
+        <svg viewBox="0 0 24 24" fill="none" className="h-12 w-12" aria-hidden="true">
+          <path
+            d="M3 11.5 12 4l9 7.5M5 10v9a1 1 0 0 0 1 1h3v-6h6v6h3a1 1 0 0 0 1-1v-9"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
-        </div>
-      ) : (
-        <div className="flex h-40 items-center justify-center bg-gradient-to-br from-brand-100 to-brand-50 text-brand-400">
-          <svg viewBox="0 0 24 24" fill="none" className="h-12 w-12" aria-hidden="true">
-            <path
-              d="M3 11.5 12 4l9 7.5M5 10v9a1 1 0 0 0 1 1h3v-6h6v6h3a1 1 0 0 0 1-1v-9"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-      )}
+        </svg>
+      </div>
 
       <div className="flex flex-1 flex-col gap-2 p-4">
         <div className="flex items-center gap-2">

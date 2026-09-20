@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import type { Listing, ListingStatus } from '../../types/listing.types';
 import { formatSyp, formatUsd } from '../../utils/formatPrice';
 import { PROPERTY_TYPE_LABELS, TRANSACTION_TYPE_LABELS } from '../../utils/listingLabels';
-import { resolveMediaUrl } from '../../utils/mediaUrl';
 import { Card } from '../common/Card';
 import { Button } from '../common/Button';
 
@@ -37,11 +36,6 @@ export function OwnerListingCard({
 }: OwnerListingCardProps) {
   return (
     <Card className="flex flex-col gap-3 p-4">
-      {listing.photos.length > 0 && (
-        <div className="-mx-4 -mt-4 h-32 overflow-hidden rounded-t-2xl bg-stone-100">
-          <img src={resolveMediaUrl(listing.photos[0].url)} alt="" className="h-full w-full object-cover" />
-        </div>
-      )}
       <div>
         <div className="mb-1 flex flex-wrap gap-1.5">
           <span className="rounded-full bg-brand-50 px-2 py-0.5 text-xs font-semibold text-brand-700">
