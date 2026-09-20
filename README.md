@@ -29,7 +29,7 @@ A full-stack property portal for the Syrian real-estate market: search and list 
 
 ## Features
 
-- **Listings** — residential / commercial / land, each with its own detail schema, dual SYP/USD pricing, up to 8 optional photos per listing.
+- **Listings** — residential / commercial / land, each with its own detail schema, dual SYP/USD pricing, every new listing requires at least 1 photo (up to 8, validated client-side for type and size).
 - **Public search** — filter by governorate, city, property type, transaction type, and keyword; results paginated.
 - **Real-time chat** — Socket.IO rooms per conversation, delivery + read receipts, online/last-seen presence, per-user rate limiting, block/unblock enforcement.
 - **Moderation** — users can report a listing; admins review the queue and dismiss, archive, or permanently remove it. Every admin moderation action is written to an audit log automatically.

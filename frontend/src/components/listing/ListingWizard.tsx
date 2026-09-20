@@ -7,6 +7,7 @@ import { StepPricing } from './wizard/StepPricing';
 import { StepReview } from './wizard/StepReview';
 import { INITIAL_DRAFT, buildPayload } from './wizard/types';
 import type { ListingDraft } from './wizard/types';
+import { PhotoPicker } from './PhotoPicker';
 import { Button } from '../common/Button';
 import { Alert } from '../common/Alert';
 import { getErrorMessage } from '../../utils/errors';
@@ -14,7 +15,7 @@ import type { CreateListingPayload } from '../../types/listing.types';
 
 const STEP_LABELS = ['نوع العقار', 'الموقع', 'التفاصيل', 'السعر والوصف', 'المراجعة'];
 
-function isStepValid(step: number, draft: ListingDraft): boolean {
+function isStepValid(step: number, draft: ListingDraft, photos: File[]): boolean {
   switch (step) {
     case 0:
       return Boolean(draft.propertyType && draft.transactionType);
@@ -27,18 +28,21 @@ function isStepValid(step: number, draft: ListingDraft): boolean {
       }
       return true;
     case 3:
-      return Boolean(draft.title.trim() && draft.description.trim() && (draft.priceSyp || draft.priceUsd));
+      return Boolean(
+        draft.title.trim() && draft.description.trim() && (draft.priceSyp || draft.priceUsd) && photos.length >= 1,
+      );
     default:
       return true;
   }
 }
 
 interface ListingWizardProps {
-  onSubmit: (payload: CreateListingPayload) => Promise<void>;
+  onSubmit: (payload: CreateListingPayload, photos: File[]) => Promise<void>;
 }
 
 export function ListingWizard({ onSubmit }: ListingWizardProps) {
   const [draft, setDraft] = useState<ListingDraft>(INITIAL_DRAFT);
+  const [photos, setPhotos] = useState<File[]>([]);
   const [step, setStep] = useState(0);
   const [furthestStep, setFurthestStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
@@ -49,7 +53,7 @@ export function ListingWizard({ onSubmit }: ListingWizardProps) {
   }
 
   function handleNext() {
-    if (!isStepValid(step, draft)) return;
+    if (!isStepValid(step, draft, photos)) return;
     const nextStep = Math.min(step + 1, STEP_LABELS.length - 1);
     setStep(nextStep);
     setFurthestStep((prev) => Math.max(prev, nextStep));
@@ -63,7 +67,7 @@ export function ListingWizard({ onSubmit }: ListingWizardProps) {
     setError('');
     setSubmitting(true);
     try {
-      await onSubmit(buildPayload(draft));
+      await onSubmit(buildPayload(draft), photos);
     } catch (err) {
       setError(getErrorMessage(err, 'حدث خطأ أثناء نشر الإعلان'));
     } finally {
@@ -72,7 +76,7 @@ export function ListingWizard({ onSubmit }: ListingWizardProps) {
   }
 
   const isLastStep = step === STEP_LABELS.length - 1;
-  const canProceed = isStepValid(step, draft);
+  const canProceed = isStepValid(step, draft, photos);
 
   return (
     <div>
@@ -88,7 +92,12 @@ export function ListingWizard({ onSubmit }: ListingWizardProps) {
         {step === 0 && <StepPropertyType draft={draft} update={update} />}
         {step === 1 && <StepLocation draft={draft} update={update} />}
         {step === 2 && <StepDetails draft={draft} update={update} />}
-        {step === 3 && <StepPricing draft={draft} update={update} />}
+        {step === 3 && (
+          <div className="flex flex-col gap-6">
+            <StepPricing draft={draft} update={update} />
+            <PhotoPicker files={photos} onChange={setPhotos} />
+          </div>
+        )}
         {step === 4 && <StepReview draft={draft} />}
       </div>
 

@@ -7,8 +7,15 @@ import type { CreateListingPayload } from '../types/listing.types';
 export default function CreateListingPage() {
   const navigate = useNavigate();
 
-  async function handleSubmit(payload: CreateListingPayload) {
-    await listingsApi.createListing(payload);
+  async function handleSubmit(payload: CreateListingPayload, photos: File[]) {
+    const listing = await listingsApi.createListing(payload);
+    try {
+      await listingsApi.uploadListingPhotos(listing.id, photos);
+    } catch (err) {
+      // A listing without photos must never go live: undo the create so the user can retry cleanly.
+      await listingsApi.deleteListing(listing.id).catch(() => undefined);
+      throw err;
+    }
     navigate('/my-listings');
   }
 
