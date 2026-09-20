@@ -115,7 +115,7 @@ echo "==> Start the API under PM2 (auto-restart on crash and on reboot)"
 cd "$APP_DIR"
 pm2 start deploy/ecosystem.config.js
 pm2 save
-sudo env PATH="$PATH" pm2 startup systemd -u "$USER" --hp "$HOME" | tail -n 1 | sudo bash
+sudo env PATH="$PATH" pm2 startup systemd -u "$USER" --hp "$HOME"
 
 echo "==> HTTPS certificate (needs the domain to already point at this server)"
 sudo certbot --nginx -d "$DOMAIN" -m "$LE_EMAIL" --agree-tos --non-interactive --redirect

@@ -38,7 +38,7 @@ A full-stack property portal for the Syrian real-estate market: search and list 
 
 ## Live Demo
 
-_Deployment pending — the zero-cost Oracle Cloud Always Free setup is scripted in [`deploy/`](deploy) and documented in [docs/deployment.md](docs/deployment.md)._
+**https://logai-syria.duckdns.org** — running on an Oracle Cloud Always Free VM (Ubuntu 22.04, Nginx + PM2 + MariaDB, Let's Encrypt TLS). The whole setup is scripted in [`deploy/`](deploy) and documented in [docs/deployment.md](docs/deployment.md).
 
 ## Tech Stack
 
